@@ -6,6 +6,7 @@ Datasets/*
 models/*
 samples/*
 predicted*
+eval_results*
 # C extensions
 *.so
 
