@@ -6,7 +6,7 @@ from vision.utils.box_utils import SSDSpec, SSDBoxSizes, generate_ssd_priors
 image_size = 300
 image_mean = np.array([127, 127, 127])  # RGB layout
 image_std =  128.0 #np.array([255, 255, 255]) #np.array([78.77, 80.508, 86.448])
-iou_threshold = 0.12
+iou_threshold = 0.3
 center_variance = 0.1
 size_variance = 0.2
 
