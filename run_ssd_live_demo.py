@@ -4,12 +4,12 @@ from glob import glob
 import sys
 import cv2
 import numpy as np
+import torch
 from torch import load, set_flush_denormal
 from vision.ssd.fpnnet_ssd import create_fpnnet_ssd, create_fpn_ssd_predictor
 from vision.utils.misc import Timer
 from tracker import Tracker
 from utils import Flags
-from torchsummary import summary
 
 set_flush_denormal(True)
 if len(sys.argv) < 3:
@@ -34,13 +34,12 @@ else:
 class_names = [name.strip() for name in open(label_path).readlines()]
 num_classes = len(class_names)
 
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 net = create_fpnnet_ssd(num_classes, is_test=True)
 net.load_state_dict(load(model_path, map_location=lambda storage, loc: storage))
 net.eval()
-predictor = create_fpn_ssd_predictor(net, candidate_size=200)
+predictor = create_fpn_ssd_predictor(net, candidate_size=200, device=DEVICE)
 
-
-summary(net, input_size=(3, 300, 300))
 
 def predict(image):
     timer.start()
