@@ -9,6 +9,7 @@ predicted*
 eval_results*
 # C extensions
 *.so
+test*
 
 # Distribution / packaging
 .Python

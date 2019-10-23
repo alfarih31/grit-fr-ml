@@ -52,7 +52,7 @@ def compute_iou(boxA, boxB, eps=1e-5):
 
 def predict(image):
     timer.start()
-    boxes, labels, probs = predictor.predict(image, 20, 0.9)
+    boxes, labels, probs = predictor.predict(image, 20, 0.5)
     interval = timer.end()
     print('Time: {:.2f}s, Detect Objects: {:d}.'.format(interval, labels.size(0)))
     for i in range(boxes.size(0)):
@@ -73,7 +73,7 @@ predicted_face = 0
 for file in tqdm(files[:20]):
     annotation_file = "Datasets/Annotations/%s.xml"%file.strip()
     objects = ET.parse(annotation_file).findall("object")
-    img = cv2.imread("Datasets/JPEGImages/%s"%file.strip())
+    img = cv2.imread("Datasets/image_in_image/%s"%file.strip())
     img, n_box = predict(img)
     total_face += len(objects)
     for obj in objects:

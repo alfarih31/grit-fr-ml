@@ -1,1 +1,1 @@
-Akurasi model: 90.909 percent
+Akurasi model: 97.561 percent
